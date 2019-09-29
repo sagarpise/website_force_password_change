@@ -3,20 +3,27 @@ odoo.define('website_force_password_change.force_password_change', function (req
 
     var ajax = require('web.ajax');
     var session = require('web.session');
+    var rpc = require('web.rpc');
+
     require('web.dom_ready');
 
     function forcePasswordChange () {
-        var diffPage = window.location.pathname.indexOf('/change/password') < 0;
+        var diffPage = window.location.pathname.indexOf("/change/password") < 0;
+        var userId = session.user_id;
+
         if (!session.is_website_user && diffPage) {
-            var action = "/force-password-change";
-            ajax.jsonRpc(action, "call").then(function (res) {
-                var response = JSON.parse(res);
-                // Show in modal or update current dom to contain page?
-                if (response["redirect"]) {
-                    window.location.href = response["redirect"];
+            rpc.query({
+                'model': "res.users",
+                'method': "search_read",
+                'args': [[["id", "=", userId]], ["force_password_change"]],
+            }).then(function (user) {
+                var forcePassword = user[0].force_password_change;
+                if (forcePassword) {
+                    window.location.href = "/change/password";
                 }
             });
         }
     }
+
     forcePasswordChange();
 });

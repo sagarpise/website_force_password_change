@@ -50,7 +50,7 @@ class ResUsers(models.Model):
     # 6. CRUD methods
     @api.multi
     def write(self, values):
-        """ Remove force password when password updated """
+        """ Change force_password_change to False when password is updated """
         if values.get("password"):
             values["force_password_change"] = False
         return super(ResUsers, self).write(values)
