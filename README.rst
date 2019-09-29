@@ -15,7 +15,10 @@ Configuration
 
 Usage
 =====
-\-
+
+By default new users will have *force_password_change*-field enabled, which is visible
+in res.users form view. You can also set the value of this field manually to force
+user to change their password.
 
 Known issues / Roadmap
 ======================
