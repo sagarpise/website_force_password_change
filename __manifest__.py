@@ -18,7 +18,7 @@
 {
     'name': 'Website Force Password Change',
     'summary': 'Force password change for portal users',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.1.0',
     'category': 'Website',
     'website': 'https://github.com/savijoki/website_force_password_change',
     'author': 'Aleksi Savijoki',
@@ -29,6 +29,7 @@
     'data': [
         'views/res_users_views.xml',
         'views/assets.xml',
+        'views/website_change_password.xml',
     ],
     'demo': [
     ],
